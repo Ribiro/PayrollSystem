@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="container-fluid">
+      <img src="{{ bar |safe  }}", height="400px">
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newpayrollModal">
   Generate Payroll
@@ -85,4 +86,5 @@
   </tbody>
 
 </table>
+
 {% endblock content %}

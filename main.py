@@ -5,8 +5,8 @@ from resources.employees import Employees
 import pygal
 
 app = Flask(__name__)
-app.config.from_object(Development)
-# app.config.from_object(Production)
+# app.config.from_object(Development)
+app.config.from_object(Production)
 
 
 # create an instance of SQLAlchemy
