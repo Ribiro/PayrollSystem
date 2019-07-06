@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container-fluid">
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newpayrollModal">
+  Generate Payroll
+</button>
+<p>please put a bar chart below</p>
+<!-- Modal -->
+<div class="modal fade" id="newpayrollModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Generate {{ mfanyikazi.name }}'s Payroll</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <form action="/generate/{{ mfanyikazi.id }}" method="POST">
+              <label for="month">Month</label>
+              <select name="month" class="form-control">
+                  <option value="january">January</option>
+                  <option value="february">February</option>
+                  <option value="march">March</option>
+                  <option value="april">April</option>
+                  <option value="may">May</option>
+                  <option value="june">June</option>
+                  <option value="july">July</option>
+                  <option value="august">August</option>
+                  <option value="september">September</option>
+                  <option value="october">October</option>
+                  <option value="november">November</option>
+                  <option value="december">December</option>
+              </select>
+
+              <label for="year">Year</label>
+              <input name="year" required type="text" placeholder="Enter Year" class="form-control">
+
+              </br>
+
+              <label for="overtime">Overtime</label>
+
+              <input name="overtime" type="text" class="form-group" value="0">
+              <div class="form-group">
+                  <input type="submit" class="form-control btn btn-primary">
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <table class="table">
+  <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Month</th>
+        <th scope="col">Gross Salary</th>
+        <th scope="col">PAYE</th>
+        <th scope="col">NHIF</th>
+        <th scope="col">NSSF</th>
+        <th scope="col">Personal Relief</th>
+        <th scope="col">SACCO Contribution</th>
+        <th scope="col">Pension</th>
+        <th scope="col">Net Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for each in mfanyikazi.payrolls %}
+    <tr>
+      <th scope="row">{{ each.id }}</th>
+      <td>{{ each.month }}</td>
+      <td>{{ each.gross_salary }}</td>
+        <td>{{ each.payee }}</td>
+      <td>{{ each.nhif }}</td>
+      <td>{{ each.nssf }}</td>
+      <td>{{ each.personal_relief }}</td>
+      <td>{{ each.sacco_contribution }}</td>
+      <td>{{ each.pension }}</td>
+      <td>{{ each.net_salary }}</td>
+  {% endfor %}
+  </tbody>
+
+</table>
+{% endblock content %}
